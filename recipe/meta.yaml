@@ -1,6 +1,5 @@
 {% set name = "innerscope" %}
-{% set version = "0.5.1" %}
-
+{% set version = "0.6.0" %}
 
 package:
   name: {{ name|lower }}
@@ -8,19 +7,21 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/innerscope-{{ version }}.tar.gz
-  sha256: ecea67a1aeb302e4139f0da0e70e72be9611a9a71c69c5b390e8db6c2bc2fb1b
+  sha256: 06e6e337c1e79c319d4616d9d95dc1a068c888dbb9494297ce8599f6ddef7d4b
 
 build:
-  number: 0
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
+  number: 0
 
 requirements:
   host:
+    - python >=3.8
+    - setuptools >=64
+    - setuptools-git-versioning
     - pip
-    - python >=3.6
   run:
-    - python >=3.6
+    - python >=3.8
     - toolz
 
 test:
@@ -29,13 +30,19 @@ test:
     - innerscope.tests
   commands:
     - pip check
+    - pytest -v --pyargs innerscope
   requires:
     - pip
+    - pytest
 
 about:
   home: https://github.com/eriknw/innerscope
   summary: Expose the inner scope of functions
+  description: |
+    Innerscope exposes the inner scope of functions and offers primitives suitable for creating pipelines.
+    It explores a design space around functions, dictionaries, and classes.
   license: BSD-3-Clause
+  license_family: BSD
   license_file: LICENSE
   dev_url: https://github.com/eriknw/innerscope
 
