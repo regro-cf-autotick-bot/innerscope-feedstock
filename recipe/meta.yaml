@@ -1,5 +1,5 @@
 {% set name = "innerscope" %}
-{% set version = "0.6.0" %}
+{% set version = "0.7.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/innerscope-{{ version }}.tar.gz
-  sha256: 06e6e337c1e79c319d4616d9d95dc1a068c888dbb9494297ce8599f6ddef7d4b
+  sha256: f5423410867360a1d00f6533c55a4af0a2e050d43b424394e51c59b28db2ef4d
 
 build:
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
 requirements:
