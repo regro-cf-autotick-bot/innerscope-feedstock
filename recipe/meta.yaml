@@ -6,22 +6,22 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/innerscope-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/innerscope-{{ version }}.tar.gz
   sha256: f5423410867360a1d00f6533c55a4af0a2e050d43b424394e51c59b28db2ef4d
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.8
+    - python {{ python_min }}
     - setuptools >=64
     - setuptools-git-versioning
     - pip
   run:
-    - python >=3.8
+    - python >={{ python_min }}
     - toolz
 
 test:
@@ -34,6 +34,7 @@ test:
   requires:
     - pip
     # - pytest
+    - python {{ python_min }}
 
 about:
   home: https://github.com/eriknw/innerscope
